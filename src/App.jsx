@@ -6,12 +6,16 @@ export default class App extends Component {
   state = {
     tasks: [],
     checkboxs: [],
+    startDates: [],
+    prioritys: [],
   };
   //metodo submit, ingresar tasks en la table, Obtenidos desde Form, que envia mediante props la funcion con los parametros
   handleSubmit = (data) => {
     this.setState({
       tasks: [...this.state.tasks, data.task],
       checkboxs: [...this.state.checkboxs, data.checkbox],
+      startDates: [...this.state.startDates, data.startDate],
+      prioritys: [...this.state.prioritys, data.radioPriority],
     });
   };
   /*   onCheckChange = (index, data) => {
@@ -19,13 +23,19 @@ export default class App extends Component {
   }; */
   //metodo removeTask, que el parametro index es pasado por el hijo TableTask
   removeTask = (index) => {
-    const { tasks, checkboxs } = this.state;
+    const { tasks, checkboxs, startDates, prioritys } = this.state;
     //ahora modificamos el objeto, y filtramos para eleminar solo el que ha sido apsado como index
     this.setState({
       tasks: tasks.filter((task, i) => {
         return i !== index;
       }),
       checkboxs: checkboxs.filter((checkbox, i) => {
+        return i !== index;
+      }),
+      startDates: startDates.filter((startDate, i) => {
+        return i !== index;
+      }),
+      prioritys: prioritys.filter((priority, i) => {
         return i !== index;
       }),
     });
@@ -42,7 +52,7 @@ export default class App extends Component {
   };
   render() {
     //para pasar las tareas al hijo TableTasks, por props
-    const { tasks, checkboxs } = this.state;
+    const { tasks, checkboxs, startDates, prioritys } = this.state;
 
     return (
       <div className='App'>
@@ -61,6 +71,8 @@ export default class App extends Component {
           <TableTasks
             taskData={tasks}
             checkboxData={checkboxs}
+            startDateData={startDates}
+            priorityData={prioritys}
             removeTask={this.removeTask}
             onChangeCheckbox={this.onChangeCheckbox}
           />
