@@ -22,6 +22,7 @@ export default class Form extends Component {
   };
   /* Recuperar el valor del DatePicker */
   handleChangeDate = (newDate) => {
+    /*     console.log(newDate); */
     this.setState({
       startDate: newDate,
     });
